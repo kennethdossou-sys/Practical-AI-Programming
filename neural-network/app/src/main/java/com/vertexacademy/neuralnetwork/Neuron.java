@@ -36,10 +36,10 @@ public class Neuron {
 
     /* ==== INSTANCE VARIABLES === */
 
-    private double[] weights;
-    private double bias;
-    private double output;
-    private double learningRate;
+    protected double[] weights;
+    protected double bias;
+    protected double output;
+    protected double learningRate;
 
 
     /*
@@ -114,29 +114,4 @@ public class Neuron {
     public void setBias(double bias) { this.bias = bias;}
     public void setLearningRate(double learningRate) {this.learningRate = learningRate;}
 
-
-    public static void main(String[] args) {
-
-        double[] data = {0.0, 1.0};
-        Neuron n = new Neuron(2);
-
-        n.setWeights(new double[]{-1.0, -1.0});
-        n.setBias(2.0);
-
-        System.out.println("\n\nBefore training...");
-
-        System.out.println("neuron bias = " + n.getBias());
-        System.out.println("neuron weights : [" + n.getWeights()[0]
-                        + ", " + n.getWeights()[1] + "]");
-        
-       
-        n.train(data, 0);
-
-        System.out.println("\n\nAfter training...");
-
-        System.out.println("neuron bias = " + n.getBias());
-        System.out.println("neuron weights : [" + n.getWeights()[0]
-                        + ", " + n.getWeights()[1] + "]");
-        System.out.println("neuron fires " + n.feed(data));
-    }
 }
