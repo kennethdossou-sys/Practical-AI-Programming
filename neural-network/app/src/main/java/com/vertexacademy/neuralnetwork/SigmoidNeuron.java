@@ -46,8 +46,8 @@ public class SigmoidNeuron extends Neuron {
     }
 
     /*
-    *   Fonction d'activation du neurone, remplace le step function
-    *   du Neuron de base par une sigmoide.
+    *   Fonction d'activation du neurone, remplace la function en escalier
+    *   du Neuron de base (Perceptron) par une sigmoide.
     */
     @Override
     public int feed(double[] inputs)

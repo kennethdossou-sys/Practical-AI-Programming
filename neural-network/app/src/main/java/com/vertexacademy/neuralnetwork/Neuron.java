@@ -28,7 +28,6 @@ package com.vertexacademy.neuralnetwork;
     *
 */
 
-import java.util.Arrays;
 import java.util.Random;
 
 

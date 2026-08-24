@@ -15,10 +15,61 @@ package com.vertexacademy.neuralnetwork;
 
 public class App {
 
+    private static double[][] inputs = {
+        {0, 0},
+        {0, 1},
+        {1, 0},
+        {1, 1}
+    };
+
+    // Entrainement sur plusieurs epoques
+    private static int nbEpochs = 5000;
+
     public static void main(String[] args) {
 
+        testNeuron();
         testSigmoidNeuron();
+        
         //testNeuronLayer();
+    }
+
+    /*
+     *  Teste un Perceptron seul : on initialise avec des poids et bias
+     *  connus, on observe sa sortie avant entrainement. 
+     *  Puis on l'entraine sur la table de verite de la porte OR.
+    */
+
+    private static void testNeuron() {
+        System.out.println("==== Test de Perceptron =====\n");
+
+        Neuron neuron = new Neuron(2);
+
+        neuron.setWeights(new double[]{0.2, 0.2});
+        neuron.setBias(-0.3);
+
+        double[] desiredOutputs = {0, 1, 1, 1}; // porte OR
+        
+        System.out.println("Avant entrainement :");
+        System.out.println();
+        afficherParametres(neuron, 0);
+        afficherSorties(neuron, inputs);
+
+
+        for (int epoch = 0; epoch < nbEpochs; epoch++) {
+            for (int i = 0; i < inputs.length; i++) {
+                neuron.train(inputs[i], desiredOutputs[i]);   
+            }
+
+            if ((epoch + 1) % 1000 == 0) {
+                afficherParametres(neuron, epoch + 1);
+            }
+        }
+    
+        System.out.println("\nAprès " + nbEpochs + " epoques d'entrainement :");
+        System.out.println();
+
+        afficherSorties(neuron, inputs);
+        System.out.println();
     }
 
     /*
@@ -37,19 +88,14 @@ public class App {
         neuron.setBias(0.0);
         neuron.setLearningRate(0.5);
 
-        double[][] inputs = {
-            {0, 0},
-            {0, 1},
-            {1, 0},
-            {1, 1}
-        };
+        
         double[] desiredOutputs = {0, 1, 1, 1}; // porte OR
 
         System.out.println("Avant entrainement :");
-        afficherSorties(neuron, inputs);
+        System.out.println();
+        afficherSorties(((SigmoidNeuron)neuron), inputs);
 
-        // Entrainement sur plusieurs epoques
-        int nbEpochs = 5000;
+        
         for (int epoch = 0; epoch < nbEpochs; epoch++) {
             for (int i = 0; i < inputs.length; i++) {
                 neuron.train(inputs[i], desiredOutputs[i]);
@@ -57,7 +103,9 @@ public class App {
         }
 
         System.out.println("\nAprès " + nbEpochs + " epoques d'entrainement :");
-        afficherSorties(neuron, inputs);
+        System.out.println();
+
+        afficherSorties(neuron , inputs);
         System.out.println();
     }
 
@@ -66,13 +114,34 @@ public class App {
     *   ainsi que la sortie binaire (seuillee a 0.5) du neurone.
     */
     private static void afficherSorties(SigmoidNeuron neuron, double[][] inputs) {
+        
         for (double[] input : inputs) {
+
             int binaryOutput = neuron.feed(input);
             double continuousOutput = neuron.getContinuousOutput();
-
             System.out.printf("  [%.0f, %.0f] -> sortie continue = %.4f | sortie binaire = %d%n",
-                            input[0], input[1], continuousOutput, binaryOutput);
+                    input[0], input[1], continuousOutput, binaryOutput);
         }
+    }
+
+    private static void afficherSorties(Neuron neuron, double[][] inputs) {
+
+        for (double[] input : inputs) {
+            int binaryOutput = neuron.feed(input);
+            System.out.printf("  [%.0f, %.0f] -> sortie binaire = %d%n",
+                    input[0], input[1], binaryOutput);
+        }
+    }
+
+    private static void afficherParametres(Neuron neuron, int epoch) {
+        
+        double[] weights = neuron.getWeights();
+        System.out.printf("  Epoque %d : poids = [", epoch);
+
+        for (int i = 0; i < weights.length; i++) {
+            System.out.printf("%.4f%s", weights[i], i < weights.length - 1 ? ", " : "");
+        }
+        System.out.printf("] | bias = %.4f%n", neuron.getBias());
     }
 
     /*
