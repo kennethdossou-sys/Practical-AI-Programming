@@ -29,8 +29,7 @@ public class App {
 
         testNeuron();
         testSigmoidNeuron();
-        
-        //testNeuronLayer();
+        testNeuronLayer();
     }
 
     /*
@@ -151,35 +150,35 @@ public class App {
     *   ce test verifie surtout la bonne construction de la couche et
     *   la propagation correcte a travers tous ses neurones.
     */
-    // private static void testNeuronLayer() {
+    private static void testNeuronLayer() {
 
-    //     System.out.println("=== Test de NeuronLayer ===\n");
+        System.out.println("=== Test de NeuronLayer ===\n");
 
-    //     int nbOfNeurons = 4;
-    //     int nbOfWeights = 3;
+        int nbOfNeurons = 4;
+        int nbOfWeights = 3;
 
-    //     NeuronLayer layer = new NeuronLayer(nbOfNeurons, nbOfWeights);
+        NeuronLayer layer = new NeuronLayer(nbOfNeurons, nbOfWeights);
 
-    //     System.out.println("Couche construite avec " + layer.getNeurons().length
-    //                     + " neurones, chacun avec " + nbOfWeights + " poids.");
-    //     System.out.println("learningRate de la couche = " + layer.getLearningRate());
+        System.out.println("Couche construite avec " + layer.getNeurons().length
+                        + " neurones, chacun avec " + nbOfWeights + " poids.");
+        System.out.println("learningRate de la couche = " + layer.getLearningRate());
 
-    //     double[] sampleInputs = {1.0, 0.0, 1.0};
-    //     int[] outputs = layer.feed(sampleInputs);
+        double[] sampleInputs = {1.0, 0.0, 1.0};
+        int[] outputs = layer.feed(sampleInputs);
 
-    //     System.out.print("\nSorties de la couche pour l'entree [1, 0, 1] : [");
-    //     for (int i = 0; i < outputs.length; i++) {
-    //         System.out.print(outputs[i] + (i < outputs.length - 1 ? ", " : ""));
-    //     }
-    //     System.out.println("]");
+        System.out.print("\nSorties de la couche pour l'entree [1, 0, 1] : [");
+        for (int i = 0; i < outputs.length; i++) {
+            System.out.print(outputs[i] + (i < outputs.length - 1 ? ", " : ""));
+        }
+        System.out.println("]");
 
-    //     // Detail par neurone : sortie continue + poids/biais utilises
-    //     System.out.println("\nDetail par neurone :");
-    //     SigmoidNeuron[] neurons = layer.getNeurons();
-    //     for (int i = 0; i < neurons.length; i++) {
-    //         SigmoidNeuron n = neurons[i];
-    //         System.out.printf("  Neurone %d : sortie continue = %.4f | bias = %.4f%n",
-    //                         i, n.getContinuousOutput(), n.getBias());
-    //     }
-    // }
+        // Detail par neurone : sortie continue + poids/biais utilises
+        System.out.println("\nDetail par neurone :");
+        SigmoidNeuron[] neurons = layer.getNeurons();
+        for (int i = 0; i < neurons.length; i++) {
+            SigmoidNeuron n = neurons[i];
+            System.out.printf("  Neurone %d : sortie continue = %.4f | bias = %.4f%n",
+                            i, n.getContinuousOutput(), n.getBias());
+        }
+    }
 }

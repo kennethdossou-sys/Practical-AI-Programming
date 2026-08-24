@@ -121,8 +121,24 @@ public class NeuronLayer {
                         + " neurones, learningRate = " + layer.getLearningRate());
 
         int[] outputs = layer.feed(new double[]{0.0, 1.0});
+        
+        // Affichage des poids de chaque neurone
+        System.out.println("Affichage des poids de chaque neuron de la couche ");
+        System.out.println();
 
+        for (int i = 0; i < layer.neurons.length; i++)
+        {
+            System.out.printf("neuron[%d]\nw[0] = %.4f \t w[1] = %.4f\t bias = %.4f", 
+                        i, layer.neurons[i].getWeights()[0], 
+                        layer.neurons[i].getWeights()[1],
+                        layer.neurons[i].getBias());
+            System.out.println();
+        }
+
+        System.out.println();
         System.out.print("Sorties de la couche : [");
+
+
         for (int i = 0; i < outputs.length; i++)
         {
             System.out.print(outputs[i] + (i < outputs.length - 1 ? ", " : ""));
