@@ -95,7 +95,8 @@ public class NeuronNetworkTest {
 
         int[] outputs = digitalComparatorNetwork.feed(new double[]{0, 1});
 
-        // La methode feed actuelle renvoie encore les sorties de la couche cachee.
-        assertEquals(4, outputs.length);
+        // La methode feed actuelle renvoie 3 si la derniere couche est 
+        // la couche de sortie. Autrement dit on aurait 4 valeurs (nb de neurones de la couche cachee)
+        assertEquals(3, outputs.length);
     }
 }

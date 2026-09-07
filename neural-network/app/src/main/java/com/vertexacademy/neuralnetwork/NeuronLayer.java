@@ -154,7 +154,6 @@ public class NeuronLayer {
             return outputs;
         }
         else{
-            
             double[] newOutputs = new double[outputs.length];
 
             // Cast int to double before send to the next layer
@@ -166,7 +165,7 @@ public class NeuronLayer {
         }
     }
 
-    // Ecrivez la methode train pour la couche de neurones
+    
     public void train(double[] inputs, double[] desiredOutputs) {
 
         if (desiredOutputs.length != this.neurons.length) {

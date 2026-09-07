@@ -121,4 +121,21 @@ public class NeuronNetwork {
             layer.setLearningRate(learningRate);
         }
     }
+
+    public static void main(String[] args) {
+        NeuronNetwork digitalComparatorNetwork = new NeuronNetwork();
+        digitalComparatorNetwork.configure(1, 4, 2, 3);
+
+        // Comme vous pouvez le constatez, notre reseau neuronal ne se comporte pas encore 
+        // comme un comparateur digital 
+        //  A  B       A<B      A = B    A>B
+        // [0, 0] => [aLb = 0, aEb = 1, aGb = 0]
+        // [0, 1] => [alb = 1, aEb = 0, aGb = 0]
+        // [1, 0] => [aLb = 0, aEb = 0, aGb = 1]
+        // [1, 1] => [aLb = 0, aEb = 1, aGb = 0]
+
+        int[] outputs = digitalComparatorNetwork.feed(new double[]{0, 1});
+        System.out.printf("A = 0 and B = 1\n[aLb] = %d, [aEb] = %d, [aGb] = %d\n", 
+                        outputs[0], outputs[1], outputs[2]);
+    }
 }
