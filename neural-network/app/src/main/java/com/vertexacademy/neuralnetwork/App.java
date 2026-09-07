@@ -126,6 +126,7 @@ public class App {
 
 
         NeuronLayer layer = new NeuronLayer(nbOfNeurons, nbOfWeights);
+        layer.setNextLayer(null);
 
         System.out.println("Couche construite avec " + layer.getNeurons().length
                         + " neurones, chacun avec " + nbOfWeights + " poids.");

@@ -150,7 +150,20 @@ public class NeuronLayer {
             outputs[i] = this.neurons[i].feed(inputs);
         }
 
-        return outputs;
+        if(this.isOutputLayer()) {
+            return outputs;
+        }
+        else{
+            
+            double[] newOutputs = new double[outputs.length];
+
+            // Cast int to double before send to the next layer
+            for (int i = 0; i < outputs.length; i++) {
+                newOutputs[i] = ((double)outputs[i]);
+            }
+
+            return this.nextLayer.feed(newOutputs);
+        }
     }
 
     // Ecrivez la methode train pour la couche de neurones
